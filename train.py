@@ -89,22 +89,22 @@ def load_data(net_name):
     return H, train_g, train_pos_g, train_neg_g, test_pos_g, test_neg_g
 
 
-# def dhg_construct_hg(H):
-#     num_v = H.shape[0]
-#     H = H + np.eye(num_v)
-#     row, col = np.nonzero(H)
-#     hyperedges = dict()
-#     for node, edge in zip(row, col):
-#         if edge in hyperedges:
-#             hyperedges[edge].append(node)
-#         else:
-#             hyperedges[edge] = [node]
-#     for key in hyperedges.keys():
-#         hyperedges[key].append(key)
-#
-#     e_list = list(hyperedges.values())
-#     hypergraph = dhg.structure.Hypergraph(num_v, e_list)
-#     return hypergraph
+def dhg_construct_hg(H):
+    num_v = H.shape[0]
+    H = H + np.eye(num_v)
+    row, col = np.nonzero(H)
+    hyperedges = dict()
+    for node, edge in zip(row, col):
+        if edge in hyperedges:
+            hyperedges[edge].append(node)
+        else:
+            hyperedges[edge] = [node]
+    for key in hyperedges.keys():
+        hyperedges[key].append(key)
+
+    e_list = list(hyperedges.values())
+    hypergraph = dhg.structure.Hypergraph(num_v, e_list)
+    return hypergraph
 
 
 def compute_loss(pos_score, neg_score):
